@@ -6,21 +6,21 @@ import re
 import pandas as pd
 
 #this displays the top 250 movies on imdb
-#remember making the site load completely, by making driver wait before performing queries on it, is paramount.
-#data is never missing this way.
 
 url = "https://www.imdb.com/chart/top/"
 #create the browser obj
 driver = Safari()
 #pass the site in the browser obj
 driver.get(url)
-#add a wait, so the page can fully load up, this way I can retrieve everything, sometimes things might be missing cuz the page hasn't loaded, completely.
-time.sleep(5)
-#than pass driver.page_source to pass the data in the page
+#adding a wait, so the page can fully load up.
+time.sleep(10)
+#creating soup obj using driver page source
 soup = BeautifulSoup(driver.page_source, "html.parser") 
-#driver.execute_script("window.scrollTo(0,document.documentElement.scrollHeight)")
+#selecting all the movie's names
 movie_names = soup.select("li h3")
+#finding all the movie's ratings
 ratings = soup.find_all("span" , attrs = {"data-testid": "ratingGroup--imdb-rating"})
+#finding all the movie's released year
 movie_year = soup.find_all("span", attrs = {"class": "sc-be6f1408-8 fcCUPU cli-title-metadata-item"})
 
 #A count that is used for seperating runtime and released year 
@@ -64,12 +64,9 @@ for year in movie_year:
         temp1 = ""
         tyear = ""
     count+=1
-
-#("div", attrs = {"data-testid" : "ratingGroup--container"})
-
+    
 #Seperating votes and appending them
-for rate in ratings:
-    #t = j.find("span" , attrs = {"data-testid": "ratingGroup--imdb-rating"}).text   
+for rate in ratings: 
     temp = rate.text
     temp = temp.split()
     votes.append(temp[1])
@@ -89,19 +86,7 @@ df["Runtime"] =runtime
 df["Rating"] = rating
 df["Votes"] = votes
 
-#print(df.iloc[[106]]) #Problem here
-#print(df.head(25))
-
 driver.quit()
 
 #saving dataframe to csv file
 df.to_csv("IMDB top 250 movies.csv", index = False)
-    
-#from selenium.webdriver.Safari.options import Options
-"""
-
-options = Options()
-options.headless = True
-"""
-
-#when you encounter a moment where you can't scrape with bs4 due to data scraping protection of the website, try passing it in selenium first, then into bs4.
