@@ -92,7 +92,7 @@ def main():
     print("Saving data to IMDB top 250 movies.csv")
     #saving dataframe to csv file
     df.to_csv("IMDB top 250 movies.csv", index = False)
-    print("Data Saved, now displaying first 10 entries!")
+    print("Data Saved, now displaying entries!")
     file = pd.read_csv("IMDB top 250 movies.csv", sep = ",")
     num_of_movies = int(input("Enter number of top movies to show!\n"))
     pd.set_option("display.max_columns", None)
