@@ -14,7 +14,7 @@ def main():
     #pass the site in the browser obj
     driver.get(url)
     #adding a wait, so the page can fully load up.
-    time.sleep(5)
+    time.sleep(10)
     #creating soup obj using driver page source
     soup = BeautifulSoup(driver.page_source, "html.parser")
     #selecting all the movie's names
