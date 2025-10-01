@@ -97,9 +97,12 @@ folder_selected = filedialog.askdirectory()
 root.destroy()
 root.mainloop()
 
+#file name
+fname = input("Enter file name")
+
 #Use the selected folder to set the save location
 #saving dataframe to csv file
-df.to_csv(folder_selected + "/" +"IMDB top 250 movies.csv", index = False)
+df.to_csv(folder_selected + "/" + fname +".csv", index = False)
 #prints the file saved location 
-print("File saved at\n", folder_selected)
-
+print("File saved at\n", folder_selected+"/"+fname)
+print("File name\n", fname)
