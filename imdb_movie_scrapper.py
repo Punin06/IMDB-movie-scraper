@@ -98,7 +98,7 @@ root.destroy()
 root.mainloop()
 
 #file name
-fname = input("Enter file name")
+fname = input("Enter file name\n")
 
 #Use the selected folder to set the save location
 #saving dataframe to csv file
