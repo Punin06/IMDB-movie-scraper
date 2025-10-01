@@ -66,8 +66,7 @@ for year in movie_year:
     count+=1
 
 #Seperating votes and appending them
-for rate in ratings:
-    #t = j.find("span" , attrs = {"data-testid": "ratingGroup--imdb-rating"}).text   
+for rate in ratings: 
     temp = rate.text
     temp = temp.split()
     votes.append(temp[1])
@@ -95,8 +94,12 @@ driver.quit()
 # Ask the user to select a folder
 folder_selected = filedialog.askdirectory()
 
+root.destroy()
+root.mainloop()
+
 #Use the selected folder to set the save location
 #saving dataframe to csv file
 df.to_csv(folder_selected + "/" +"IMDB top 250 movies.csv", index = False)
+#prints the file saved location 
+print("File saved at\n", folder_selected)
 
-root.mainloop()
